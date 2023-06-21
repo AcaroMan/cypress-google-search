@@ -61,7 +61,7 @@ pipeline {
                     def jmeterHome = '/usr/share/jmeter'
 
                     // Path to the JMeter test script
-                    def jmeterScript = './testPlanHome.jmx'
+                    def jmeterScript = './test.jmx'
 
                     // Execute JMeter test
                     sh "${jmeterHome}/bin/jmeter -n -t ${jmeterScript} -l result.jtl"
