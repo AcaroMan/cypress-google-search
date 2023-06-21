@@ -17,36 +17,6 @@ pipeline {
     }
 
     stages {
-        stage('Build/Deploy app to staging') {
-            when { expression { params.skip_build != true } }
-            steps {
-                echo 'Copying files to staging and restarting the app'
-                sshPublisher(
-                    publishers: [
-                        sshPublisherDesc(
-                            configName: 'staging',
-                            transfers: [
-                                sshTransfer(
-                                    cleanRemote: false,
-                                    excludes: 'node_modules/,cypress/,**/*.yml',
-                                    execCommand: '''
-                                    cd /usr/share/nginx/html
-                                    npm ci
-                                    pm2 restart todo''',
-                                    execTimeout: 1200000,
-                                    flatten: false,
-                                    makeEmptyDirs: false,
-                                    noDefaultExcludes: false,
-                                    patternSeparator: '[, ]+',
-                                    remoteDirectory: '',
-                                    remoteDirectorySDF: false,
-                                    removePrefix: '',
-                                    sourceFiles: '**/*')],
-                        usePromotionTimestamp: false,
-                        useWorkspaceInPromotion: false,
-                        verbose: true)])
-            }
-        }
         stage('Run automated tests') {
             when { expression { params.skip_test != true } }
             steps {
