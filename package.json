@@ -2,7 +2,8 @@
   "scripts": {
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "cypress:run:chrome": "cypress run --browser chrome --headless"
+    "cypress:run:chrome": "cypress run --browser chrome --headless",
+    "e2e:staging1spec": "cypress run --config baseUrl=https://www.google.com --browser ${BROWSER} --spec ${SPEC} --reporter mochawesome"
   },
   "devDependencies": {
     "cypress": "^7.0.1"
