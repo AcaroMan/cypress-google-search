@@ -1,0 +1,6 @@
+projectKey=wasd
+serverUrl=https://sonar.creis.pt
+serverVersion=8.3.1.34397
+dashboardUrl=https://sonar.creis.pt/dashboard?id=wasd
+ceTaskId=AYjfietqycD9pccTjLZC
+ceTaskUrl=https://sonar.creis.pt/api/ce/task?id=AYjfietqycD9pccTjLZC
