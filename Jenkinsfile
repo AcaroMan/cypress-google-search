@@ -53,7 +53,6 @@ pipeline {
                 }
             }
         }
-
         stage('JMeter Test') {
             when { expression { params.skip_jmeter != true } }
             steps {
@@ -76,6 +75,14 @@ pipeline {
                 success {
                     // Publish JMeter report using Performance plugin
                     perfReport filterRegex:'', sourceDataFiles: 'result.jtl'
+                }
+            }
+        }
+
+        stage('Perform manual testing...') {
+            steps {
+                timeout(time: 2, unit: 'DAYS') {
+                    input 'Proceed to production?'
                 }
             }
         }
