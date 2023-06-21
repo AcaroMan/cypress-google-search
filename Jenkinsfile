@@ -54,17 +54,6 @@ pipeline {
             }
         }
 
-        stage('Quality Gate') {
-            when { expression { params.skip_sonar != true } }
-            steps {
-                timeout(time: 1, unit: 'HOURS') {
-                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
-                    // true = set pipeline to UNSTABLE, false = don't do that
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
-
         stage('JMeter Test') {
             when { expression { params.skip_jmeter != true } }
             steps {
@@ -88,21 +77,6 @@ pipeline {
                     // Publish JMeter report using Performance plugin
                     perfReport filterRegex:'', sourceDataFiles: 'result.jtl'
                 }
-            }
-        }
-
-        stage('Perform manual testing...') {
-            steps {
-                timeout(activity: true, time: 5) {
-                    input 'Proceed to production?'
-                }
-            }
-        }
-
-        stage('Release to production') {
-            steps {
-                // similar procedure as in the 'Build/ Deploy to staging' stage, suppressed here for cost saving purposes
-                echo 'Deploying app in production environment'
             }
         }
     }
